@@ -14,10 +14,10 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { request, Request } from 'express';
-import { AuthService } from 'src/auth/auth.service';
-import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
-import { GetUser } from 'src/auth/getuser.decorator';
-import { JwtAuthGaurd } from 'src/auth/jwt/jwt.guard';
+import { AuthService } from '../auth/auth.service';
+import { LoginRequestDto } from '../auth/dto/login.request.dto';
+import { GetUser } from '../auth/getuser.decorator';
+import { JwtAuthGaurd } from '../auth/jwt/jwt.guard';
 import { UserCreateDto } from './dto/users.request.dto';
 import { Users } from './users.entitiy';
 import { UsersService } from './users.service';
