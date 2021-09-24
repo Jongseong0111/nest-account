@@ -5,36 +5,33 @@ import {
 } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { UserCreateDto } from './dto/users.request.dto';
-import { Users } from './users.entitiy';
+import { Users } from '../entities/users.entitiy';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 @EntityRepository(Users)
 export class UserRepository extends Repository<Users> {
   async createUser(userCreateDto: UserCreateDto): Promise<void> {
-    const { user_account, user_password, user_name, user_email, user_type } =
+    const { userAccount, userPassword, userName, userEmail, userType } =
       userCreateDto;
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(user_password, salt);
+    const hashedPassword = await bcrypt.hash(userPassword, salt);
     const user = this.create({
-      user_account,
-      user_password: hashedPassword,
-      user_name,
-      user_email,
-      user_type,
+      userAccount,
+      userPassword: hashedPassword,
+      userName,
+      userEmail,
+      userType,
     });
     try {
       await this.save(user);
     } catch (error) {
-      if (error.code === '23505') {
+      if (error.errno === 1062) {
         throw new ConflictException('Exist Account');
       } else {
+        console.log(error);
         throw new InternalServerErrorException();
       }
     }
   }
-  // async findByIdWithoutPassword(user_id: number):Promise<Users | null>{
-  //   const user = await this.findOne(user_id).select('-user_password');
-  //   return user;
-  // }
 }

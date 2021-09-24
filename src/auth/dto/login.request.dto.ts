@@ -1,7 +1,7 @@
 import { PickType } from '@nestjs/swagger';
-import { Users } from '../../users/users.entitiy';
+import { Users } from '../../entities/users.entitiy';
 
 export class LoginRequestDto extends PickType(Users, [
-  'user_account',
-  'user_password',
+  'userAccount',
+  'userPassword',
 ] as const) {}

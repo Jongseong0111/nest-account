@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from './users.repository';
-import { Users } from './users.entitiy';
+import { Users } from '../entities/users.entitiy';
 import { UserCreateDto } from './dto/users.request.dto';
 
 @Injectable()
@@ -32,11 +32,11 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User Not Found');
     }
-    user.user_account = userCreateDto.user_account;
-    user.user_email = userCreateDto.user_email;
-    user.user_name = userCreateDto.user_name;
-    user.user_password = userCreateDto.user_password;
-    user.user_type = userCreateDto.user_type;
+    user.userAccount = userCreateDto.userAccount;
+    user.userEmail = userCreateDto.userEmail;
+    user.userName = userCreateDto.userName;
+    user.userPassword = userCreateDto.userPassword;
+    user.userType = userCreateDto.userType;
 
     return await this.usersRepository.save(user);
   }

@@ -15,11 +15,20 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: Payload) {
-    const { user_id, user_account } = payload;
-    const user = await this.userRepositry.findOne({ user_id: payload.user_id });
-
+    const { userId, userAccount } = payload;
+    const user = await this.userRepositry
+      .createQueryBuilder('user')
+      .select([
+        'user.userId',
+        'user.userAccount',
+        'user.userEmail',
+        'user.userType',
+        'user.userName',
+      ])
+      .where('user.userId = :userId', { userId, userAccount })
+      .getOne();
     if (!user) {
-      throw new UnauthorizedException('Error');
+      throw new UnauthorizedException('UnAuthorized User');
     }
     return user;
   }

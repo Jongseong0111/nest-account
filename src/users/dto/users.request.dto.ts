@@ -5,33 +5,32 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { UserType } from '../users.entitiy';
 
 export class UserCreateDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(20)
-  user_name: string;
+  userName: string;
 
   @IsNotEmpty()
   @IsString()
-  user_email: string;
+  userEmail: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(20)
   @Matches(/^[a-zA-Z0-9]*$/)
-  user_account: string;
+  userAccount: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(8)
   @Matches(/^[a-zA-Z0-9]*$/)
-  user_password: string;
+  userPassword: string;
 
   @IsNotEmpty()
   @IsString()
-  user_type: UserType;
+  userType: string;
 }

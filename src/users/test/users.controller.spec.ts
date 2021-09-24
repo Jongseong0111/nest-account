@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthModule } from 'src/auth/auth.module';
 import { AuthService } from '../../auth/auth.service';
 import { UsersController } from '../users.controller';
-import { Users } from '../users.entitiy';
+import { Users } from '../../entities/users.entitiy';
 import { UsersService } from '../users.service';
 import { loginDtoStub, userStub } from './stub/user.stub';
 
@@ -34,11 +34,11 @@ describe('UsersController', () => {
       let user: Users;
 
       beforeEach(async () => {
-        user = await controller.getUser(userStub().user_id);
+        user = await controller.getUser(userStub().userId);
       });
 
       test('then it should call usersService', () => {
-        expect(usersService.getUser).toBeCalledWith(userStub().user_id);
+        expect(usersService.getUser).toBeCalledWith(userStub().userId);
       });
 
       test('then it should return a user', () => {

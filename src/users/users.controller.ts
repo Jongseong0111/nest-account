@@ -19,7 +19,7 @@ import { LoginRequestDto } from '../auth/dto/login.request.dto';
 import { GetUser } from '../auth/getuser.decorator';
 import { JwtAuthGaurd } from '../auth/jwt/jwt.guard';
 import { UserCreateDto } from './dto/users.request.dto';
-import { Users } from './users.entitiy';
+import { Users } from '../entities/users.entitiy';
 import { UsersService } from './users.service';
 
 @Controller('users')
